@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import sys
+
 # Returns Collatz conjecture sequence for the specified n
 def collatz_conjecture(n: int) -> list[int]:
     if n == 1:    # Edge case, stop the recursion
@@ -10,6 +12,9 @@ def collatz_conjecture(n: int) -> list[int]:
 if __name__ == '__main__':
     while True:
         try:
-            print(collatz_conjecture(int(input())))
+            print('Enter number:')
+            print(collatz_conjecture(int(input())), end = '\n\n')
         except ValueError:
+            print('Not a number!', end = '\n\n', file = sys.stderr)
+        except EOFError:
             break
