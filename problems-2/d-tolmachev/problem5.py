@@ -5,3 +5,7 @@ import math
 # Generates prime numbers less than the specified number
 def primes(n: int) -> list[int]:
     return list({i for i in range(2, n)} - {i for k in range(2, math.ceil(math.sqrt(n))) for i in range(k * 2, n, k)})    # O(NlogN)
+
+# Used as entrypoint
+if __name__ == '__main__':
+    print(primes(128))
