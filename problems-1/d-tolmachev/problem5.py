@@ -19,3 +19,12 @@ def factorize(x: int) -> list[tuple[int, int]]:
     if x > 2:
         factors.append([x, 1])
     return list(map(lambda factor: tuple(factor), factors))
+
+# Used as entrypoint
+if __name__ == '__main__':
+    n: int = 999999997
+    factors: list[tuple[int, int]] = factorize(n)
+    print(f'{n} = {factors[0][0]}^{factors[0][1]}', end = '')
+    for b, e in factors[1:]:
+        print(f' * {b}^{e}', end = '')
+    print()
