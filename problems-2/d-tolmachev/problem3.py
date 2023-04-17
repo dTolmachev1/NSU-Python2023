@@ -2,16 +2,17 @@
 
 import sys
 from pathlib import Path
+from typing import Iterable
 
 # Returns list of tuples containing information about files and their sizes
-def list_files(dir: Path) -> list[tuple[str, int]]:
-    return [(entry.name, get_size(entry)) for entry in dir.iterdir()]
+def list_files(dir: Path) -> Iterable[tuple[str, int]]:
+    return ((entry.name, get_size(entry)) for entry in dir.iterdir())
 
 # Returns full size of file or directory
 def get_size(file: Path) -> int:
     if file.is_file():    # Edge case for recursion
         return file.stat().st_size
-    return sum([get_size(entry) for entry in file.iterdir()])    # Recursively calculate size for each subdirectory
+    return sum(size for size in (get_size(entry) for entry in file.iterdir()))    # Recursively calculate size for each subdirectory
 
 # Used as entrypoint
 if __name__ == '__main__':
